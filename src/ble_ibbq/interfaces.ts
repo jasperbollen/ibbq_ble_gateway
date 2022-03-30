@@ -1,6 +1,6 @@
 export interface iProbe{
     position: number
     name: string
-    configuredTemperature?: string
+    configuredTemperature?: number
 	currentTemperature? : number
 }
