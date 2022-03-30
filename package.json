@@ -1,0 +1,35 @@
+{
+	"name": "bbq",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/app.js",
+	"scripts": {
+		"start": "node dist/app.js",
+		"dev": "nodemon src/app.ts",
+		"test": "echo \"Tests? What are those\" && exit 1",
+		"build": "tsc"
+	},
+	"keywords": [],
+	"author": {
+		"name": "Jasper Bollen",
+		"email": "jasperbollen@gmail.com"
+	},
+	"contributors": [
+		{
+			"name": "Sander Bollen",
+			"email": "sander.h.bollen@gmail.com",
+			"url": "https://sndrtj.eu/"
+		}
+	],
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^17.0.23",
+		"nodemon": "^2.0.15",
+		"ts-node": "^10.7.0",
+		"typescript": "^4.6.3"
+	},
+	"dependencies": {
+		"@abandonware/noble": "^1.9.2-15",
+		"express": "^4.17.3"
+	}
+}

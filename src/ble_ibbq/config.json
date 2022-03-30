@@ -1,0 +1,13 @@
+{
+	"temperatureUnit": "C",
+	"probes": [
+		{
+			"position": 1,
+			"name": "Kamado"
+		},
+		{
+			"position": 2,
+			"name": "Meat"
+		}
+	]
+}
