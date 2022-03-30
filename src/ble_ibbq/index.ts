@@ -4,6 +4,7 @@ import { pairingKey, subscribeTemperatureUpdates, subscribeBatteryUpdartes, setC
 import { iProbe } from './interfaces'
 
 class BBQDevice {
+	id: string
     currentTemperature: number
     temperatureUnit: string
     probes: iProbe[]
@@ -46,6 +47,7 @@ class BBQDevice {
                         return null
                     }
                     console.log('Bluetooth device found')
+					this.id = peripheral.id
                     noble.stopScanning()
                     this.populateCharacteristics(peripheral)
                 })
@@ -111,7 +113,7 @@ class BBQDevice {
 				this.connected = true
                 console.log('Paired')
                 this.SubscribeToTemperatureData()
-                // this.setDeviceUnits()
+                this.setDeviceUnits(this.temperatureUnit)
                 this.requestBatteryStatus()
             })
         } catch (e) {
@@ -173,7 +175,8 @@ class BBQDevice {
         this.batteryLevel = (current / max) * 100
     }
 
-    public setDeviceUnits() {
+    public setDeviceUnits(unit:string) {
+		this.temperatureUnit = unit
         let temperaturebuffer: Buffer
         switch (this.temperatureUnit) {
             case 'C':
