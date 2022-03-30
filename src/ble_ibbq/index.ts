@@ -2,8 +2,9 @@ import deviceConfig from './config.json'
 import noble from '@abandonware/noble'
 import { pairingKey, subscribeTemperatureUpdates, subscribeBatteryUpdartes, setCelciusUnits, setFahrenheitUnits } from './buffer'
 import { iProbe } from './interfaces'
+import EventEmitter from 'events'
 
-class BBQDevice {
+class BBQDevice extends EventEmitter{
 	id: string
     currentTemperature: number
     temperatureUnit: string
@@ -20,6 +21,7 @@ class BBQDevice {
 	connected: boolean
 
     constructor(serviceUUID: string) {
+		super()
         this.serviceUUID = serviceUUID
         this.temperatureUnit = deviceConfig.temperatureUnit
         this.characteristics = {}
@@ -111,7 +113,7 @@ class BBQDevice {
                     return null
                 }
 				this.connected = true
-                console.log('Paired')
+				this.emit('devicePaired')
                 this.SubscribeToTemperatureData()
                 this.setDeviceUnits(this.temperatureUnit)
                 this.requestBatteryStatus()
