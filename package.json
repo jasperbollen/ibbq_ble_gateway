@@ -30,6 +30,7 @@
 	},
 	"dependencies": {
 		"@abandonware/noble": "^1.9.2-15",
-		"express": "^4.17.3"
+		"express": "^4.17.3",
+		"qrcode": "^1.5.0"
 	}
 }
