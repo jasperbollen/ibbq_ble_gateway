@@ -27,7 +27,7 @@ export function subscribeTemperatureUpdates(){
 	return Buffer.from([0x0B, 0x01, 0x00, 0x00, 0x00, 0x00])
 }
 
-export function subscribeBatteryUpdartes(){
+export function subscribeBatteryUpdates(){
 	return Buffer.from([0x08, 0x24, 0x00, 0x00, 0x00, 0x00])
 }
 

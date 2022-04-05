@@ -1,6 +1,6 @@
 import deviceConfig from "./config.json";
 import noble from "@abandonware/noble";
-import { pairingKey, subscribeTemperatureUpdates, subscribeBatteryUpdartes, setCelciusUnits, setFahrenheitUnits } from "./buffer";
+import { pairingKey, subscribeTemperatureUpdates, subscribeBatteryUpdates, setCelciusUnits, setFahrenheitUnits } from "./buffer";
 import { iProbe } from "./interfaces";
 import EventEmitter from "events";
 
@@ -15,7 +15,7 @@ class BBQDevice extends EventEmitter {
         pairCharacteristic?: any;
         tempCharacteristic?: any;
         commandCharacteristic?: any;
-        batteryCharacterisitc?: any;
+        batteryCharacteristic?: any;
     };
     private bluetoothState: string;
     connected: boolean;
@@ -82,7 +82,7 @@ class BBQDevice extends EventEmitter {
                     console.error("error");
                     return null;
                 }
-                this.characteristics.batteryCharacterisitc = characteristics.filter((obj) => {
+                this.characteristics.batteryCharacteristic = characteristics.filter((obj) => {
                     return obj.uuid === "fff1";
                 });
                 this.characteristics.pairCharacteristic = characteristics.filter((obj) => {
@@ -146,19 +146,19 @@ class BBQDevice extends EventEmitter {
     }
 
     private requestBatteryStatus() {
-        this.characteristics.batteryCharacterisitc[0].subscribe((error) => {
+        this.characteristics.batteryCharacteristic[0].subscribe((error) => {
             if (error) {
                 console.error(error);
             } else {
             }
         });
 
-        this.characteristics.batteryCharacterisitc[0].on("data", (data) => {
+        this.characteristics.batteryCharacteristic[0].on("data", (data) => {
             this.handleBatteryData(data);
         });
 
         setInterval(() => {
-            this.characteristics.commandCharacteristic[0].write(subscribeBatteryUpdartes(), false);
+            this.characteristics.commandCharacteristic[0].write(subscribeBatteryUpdates(), false);
         }, 5000);
     }
 
